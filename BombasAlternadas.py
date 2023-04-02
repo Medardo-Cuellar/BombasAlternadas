@@ -5,16 +5,16 @@ import time
 
 # configuracion de pines de entrada y salida
 # definicion de salidas
-BombaPrincipal = Pin(12,Pin.OUT)
-BombaAuxiliar = Pin(13,Pin.OUT)
+BombaPrincipal = Pin(27,Pin.OUT)
+BombaAuxiliar = Pin(26,Pin.OUT)
 
 # definicion de entradas
-BajoBajo = Pin(2, Pin.IN, Pin.PULL_DOWN)
-Bajo = Pin(3, Pin.IN, Pin.PULL_DOWN)
-Alto = Pin(4, Pin.IN, Pin.PULL_DOWN)
-AltoAlto = Pin(5, Pin.IN, Pin.PULL_DOWN)
-BotonInicio = Pin(6, Pin.IN, Pin.PULL_DOWN)
-BotonParo = Pin(7, Pin.IN, Pin.PULL_DOWN)
+BajoBajo = Pin(2, Pin.IN)
+Bajo = Pin(3, Pin.IN)
+Alto = Pin(4, Pin.IN)
+AltoAlto = Pin(5, Pin.IN)
+BotonInicio = Pin(0, Pin.IN)
+BotonParo = Pin(1, Pin.IN)
 
 # configuracion de estados
 EstadoBomba1 = 0
@@ -60,13 +60,13 @@ def BotonInicio():
 # presionar boton de paro
 def BotonParo():
     global EstadoBomba1, EstadoBomba2
-    if EstadoBomba2 == 13:
-        EstadoBomba1 = 13
-        EstadoBomba2 = 12
+    if EstadoBomba2 == 27:
+        EstadoBomba1 = 27
+        EstadoBomba2 = 26
         ActivarBombas(Apagado, Apagado)
     else:
-        EstadoBomba1 = 12
-        EstadoBomba2 = 13
+        EstadoBomba1 = 26
+        EstadoBomba2 = 27
         ActivarBombas(Apagado, Apagado)
 
 # bucle principal
