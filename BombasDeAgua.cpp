@@ -71,7 +71,7 @@ void loop()
 	if(EstadoBotonInicio==1)
 	{
 		LeerEstado();
-		if(EstadoBajoBajo==1)
+		if(EstadoBajoBajo==1&&EstadoBajo==0)
 		{
 			while (EstadoBajoBajo==1&&EstadoBajo==0&&EstadoBotonParo==0)
 			{
@@ -80,7 +80,7 @@ void loop()
 			}
 			ActivarBombas(Encendido,Apagado);
 		}
-		else if(EstadoBajo==1)
+		else if(EstadoBajo==1&&EstadoAlto==0)
 		{
 			while (EstadoBajo==1&&EstadoAlto==0&&EstadoBotonParo==0)
 			{
@@ -89,7 +89,7 @@ void loop()
 			}
 			ActivarBombas(Apagado,Apagado);
 		}
-		else if(EstadoAlto==1)
+		else if(EstadoAlto==1&&EstadoAltoAlto==0)
 		{
 			while (EstadoAlto==1&&EstadoAltoAlto==0&&EstadoBotonParo==0)
 			{
