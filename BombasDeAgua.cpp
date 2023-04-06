@@ -16,8 +16,8 @@ void setup()
 	pinMode(BombaPrincipal,OUTPUT);
 	pinMode(BombaAuxiliar,OUTPUT);
 
-    EstadoBomba1 = BombaPrincipal;
-    EstadoBomba2 = BombaAuxiliar;
+	EstadoBomba1 = BombaPrincipal;
+	EstadoBomba2 = BombaAuxiliar;
 }
 void LeerEstado()
 {
@@ -25,7 +25,7 @@ void LeerEstado()
 	EstadoBajo = digitalRead(Bajo);
 	EstadoAlto = digitalRead(Alto);
 	EstadoAltoAlto = digitalRead(AltoAlto);
-    EstadoBotonParo=digitalRead(BotonParo);
+	EstadoBotonParo=digitalRead(BotonParo);
 }
 
 void ActivarBombas(int bomba1, int bomba2)
@@ -36,66 +36,64 @@ void ActivarBombas(int bomba1, int bomba2)
 	delayMicroseconds(espera);
 }
 
-void BotonInicio()
+void RutinaBotonInicio()
 {
-    EstadoBotonParo=digitalRead(BotonParo);
-    if(EstadoBotonParo==1)
-    {
-        EstadoBotonInicio=0;
-    }
-    else
-    {
-        EstadoBotonInicio=digitalRead(BotonInicio);
-    }
+	EstadoBotonParo=digitalRead(BotonParo);
+	if(EstadoBotonParo==1)
+	{
+		EstadoBotonInicio=0;
+	}
+	else
+	{
+		EstadoBotonInicio=digitalRead(BotonInicio);
+	}
 }
 
-void BotonParo()
+void AlternarBombas()
 {
 	if(EstadoBomba2==13)
 	{
 		EstadoBomba1=13;
 		EstadoBomba2=12;
-		ActivarBombas(Apagado,Apagado);
 	}
 	else
 	{
 		EstadoBomba1=12;
 		EstadoBomba2=13;
-		ActivarBombas(Apagado,Apagado);
 	}
 }
 
 void loop()
 {
-	BotonInicio();
+	RutinaBotonInicio();
 	if(EstadoBotonInicio==1)
 	{
 		LeerEstado();
-		if(EstadoBajoBajo==1&&EstadoBajo==0)
+		if(EstadoBajoBajo==1&&EstadoBajo==0&&EstadoBotonInicio==1)
 		{
-			while (EstadoBajoBajo==1&&EstadoBajo==0&&EstadoBotonParo==0)
+			while (EstadoBajoBajo==1&&EstadoBajo==0&&EstadoBotonParo==0&&EstadoBotonInicio==1)
 			{
 				ActivarBombas(Encendido,Encendido);
-                LeerEstado();
+				LeerEstado();
 			}
-			ActivarBombas(Encendido,Apagado);
 		}
-		else if(EstadoBajo==1&&EstadoAlto==0)
+		else if(EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==0&&EstadoBotonInicio==1)
 		{
-			while (EstadoBajo==1&&EstadoAlto==0&&EstadoBotonParo==0)
+			while (EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==0&&EstadoBotonParo==0&&EstadoBotonInicio==1)
 			{
 				ActivarBombas(Encendido,Apagado);
-                LeerEstado();
+				LeerEstado();
 			}
-			ActivarBombas(Apagado,Apagado);
+			AlternarBombas();
 		}
-		else if(EstadoAlto==1&&EstadoAltoAlto==0)
+		else if(EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==1&&EstadoAltoAlto==0&&EstadoBotonInicio==1)
 		{
-			while (EstadoAlto==1&&EstadoAltoAlto==0&&EstadoBotonParo==0)
+			while (EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==1&&EstadoAltoAlto==0&&EstadoBotonParo==0&&EstadoBotonInicio==1)
 			{
 				ActivarBombas(Apagado,Apagado);
-                LeerEstado();
+				LeerEstado();
 			}
+			AlternarBombas();
 		}
 		else if(EstadoAltoAlto==1)
 		{
@@ -104,14 +102,18 @@ void loop()
 				ActivarBombas(Apagado,Apagado);
 			}
 		}
+		else
+		{
+			ActivarBombas(Apagado,Apagado);
+		}
 	}
 	else if(digitalRead(BotonParo)==1)
 	{
-		BotonParo();
-        EstadoBotonInicio = 0;
+		AlternarBombas();
+		EstadoBotonInicio = 0;
 	}
-    else
-    {
-        ActivarBombas(Apagado,Apagado);
-    }
+	else
+	{
+		ActivarBombas(Apagado,Apagado);
+	}
 }
