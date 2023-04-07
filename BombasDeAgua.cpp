@@ -63,57 +63,63 @@ void AlternarBombas()
 	}
 }
 
-void loop()
+void ModoManual()
 {
-	RutinaBotonInicio();
-	if(EstadoBotonInicio==1)
+	while(EstadoBotonInicio==1&&EstadoBotonParo==0)
 	{
 		LeerEstado();
 		if(EstadoBajoBajo==1&&EstadoBajo==0&&EstadoBotonInicio==1)
 		{
-			while (EstadoBajoBajo==1&&EstadoBajo==0&&EstadoBotonParo==0&&EstadoBotonInicio==1)
+			while (EstadoBajoBajo==1&&EstadoBajo==0&&EstadoBotonParo==0)
 			{
 				ActivarBombas(Encendido,Encendido);
 				LeerEstado();
+				EstadoBotonInicio=1;
 			}
+
 		}
 		else if(EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==0&&EstadoBotonInicio==1)
 		{
-			while (EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==0&&EstadoBotonParo==0&&EstadoBotonInicio==1)
+			while (EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==0&&EstadoBotonParo==0)
 			{
 				ActivarBombas(Encendido,Apagado);
 				LeerEstado();
+				EstadoBotonInicio=1;
 			}
 			AlternarBombas();
 		}
 		else if(EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==1&&EstadoAltoAlto==0&&EstadoBotonInicio==1)
 		{
-			while (EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==1&&EstadoAltoAlto==0&&EstadoBotonParo==0&&EstadoBotonInicio==1)
+			while (EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==1&&EstadoAltoAlto==0&&EstadoBotonParo==0)
 			{
 				ActivarBombas(Apagado,Apagado);
 				LeerEstado();
+				EstadoBotonInicio=1;
 			}
 			AlternarBombas();
+
 		}
 		else if(EstadoAltoAlto==1)
 		{
 			while (EstadoAltoAlto==1)
 			{
 				ActivarBombas(Apagado,Apagado);
+				EstadoBotonInicio=0;
 			}
 		}
-		else
+		else if(EstadoBotonParo==1)
 		{
+			AlternarBombas();
+			EstadoBotonInicio = 0;
 			ActivarBombas(Apagado,Apagado);
 		}
 	}
-	else if(digitalRead(BotonParo)==1)
-	{
-		AlternarBombas();
-		EstadoBotonInicio = 0;
-	}
-	else
-	{
-		ActivarBombas(Apagado,Apagado);
-	}
+	ActivarBombas(Apagado,Apagado);
+
+}
+void loop()
+{
+	RutinaBotonInicio();
+	ModoManual();
+	EstadoBotonParo=0;
 }
