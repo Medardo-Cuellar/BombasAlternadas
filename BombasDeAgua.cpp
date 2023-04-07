@@ -63,7 +63,7 @@ void AlternarBombas()
 	}
 }
 
-void ModoManual()
+void ModoAutomatico()
 {
 	while(EstadoBotonInicio==1&&EstadoBotonParo==0)
 	{
@@ -113,6 +113,8 @@ void ModoManual()
 			EstadoBotonInicio = 0;
 			ActivarBombas(Apagado,Apagado);
 		}
+		else
+		ActivarBombas(Apagado,Apagado);
 	}
 	ActivarBombas(Apagado,Apagado);
 
@@ -120,6 +122,6 @@ void ModoManual()
 void loop()
 {
 	RutinaBotonInicio();
-	ModoManual();
+	ModoAutomatico();
 	EstadoBotonParo=0;
 }
