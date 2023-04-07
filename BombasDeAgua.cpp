@@ -76,7 +76,7 @@ void ModoManual()
 				LeerEstado();
 				EstadoBotonInicio=1;
 			}
-
+			
 		}
 		else if(EstadoBajoBajo==1&&EstadoBajo==1&&EstadoAlto==0&&EstadoBotonInicio==1)
 		{
@@ -97,7 +97,7 @@ void ModoManual()
 				EstadoBotonInicio=1;
 			}
 			AlternarBombas();
-
+			
 		}
 		else if(EstadoAltoAlto==1)
 		{
