@@ -1,14 +1,14 @@
-
+//programa de bombas de agua para mega
 // definicion de salidas
-int BombaPrincipal = 12;
-int BombaAuxiliar = 13;
+int BombaPrincipal = 34;
+int BombaAuxiliar = 36;
 // definicion de entradas
-const int BajoBajo = 2;
-const int Bajo = 3;
-const int Alto = 4;
-const int AltoAlto = 5;
-const int BotonInicio = 6;
-const int BotonParo = 7;
+const int BajoBajo = 22;
+const int Bajo = 24;
+const int Alto = 26;
+const int AltoAlto = 28;
+const int BotonInicio = 30;
+const int BotonParo = 32;
 
 int EstadoBomba1 = 0;
 int EstadoBomba2 = 0;
