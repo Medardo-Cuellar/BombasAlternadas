@@ -21,8 +21,8 @@ int EstadoAltoAlto;
 
 int Encendido = 1;
 int Apagado = 0;
-int floatON = 1;
-int floatOFF = 0;
+int floatON = 0;
+int floatOFF = 1;
 int Trayectoria = 0;
 
 int espera = 100;
@@ -119,6 +119,7 @@ void ModoAutomatico()
 				LeerEstado();
 				EstadoBotonInicio=1;
 			}
+			//AlternarBombas();
 		}
 		else if(EstadoBajoBajo==floatON&&EstadoBajo==floatON&&EstadoAlto==floatOFF&&EstadoBotonInicio==1&&Trayectoria==0)
 		{ 
@@ -139,7 +140,7 @@ void ModoAutomatico()
 				EstadoBotonInicio=1;
 			}
 			CambiarTrayecoria();
-			//AlternarBombas();
+			AlternarBombas();
 		}
 		if(EstadoBajoBajo==floatOFF&&EstadoBotonInicio==1&&Trayectoria==1)
 		{
@@ -159,6 +160,8 @@ void ModoAutomatico()
 				LeerEstado();
 				EstadoBotonInicio=1;
 			}
+			AlternarBombas();
+			CambiarTrayecoria();
 		}
 		else if(EstadoBajoBajo==floatON&&EstadoBajo==floatON&&EstadoAlto==floatOFF&&EstadoBotonInicio==1&&Trayectoria==1)
 		{ 
@@ -168,7 +171,7 @@ void ModoAutomatico()
 				LeerEstado();
 				EstadoBotonInicio=1;
 			}
-			AlternarBombas();
+			//AlternarBombas();
 			//CambiarTrayecoria();
 		}
 		else if(EstadoAltoAlto==floatON)
@@ -186,8 +189,8 @@ void ModoAutomatico()
 			EstadoBotonInicio = 0;
 			ActivarBombas(Apagado,Apagado);
 		}
-		else
-			ActivarBombas(Apagado,Apagado);
+		//else
+		//	ActivarBombas(Apagado,Apagado);
 	}
 	ActivarBombas(Apagado,Apagado);
 
